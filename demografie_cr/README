@@ -1,0 +1,76 @@
+1) main.py – „mozek aplikace“
+
+Soubor main.py obsahuje veškerou logiku programu a práci s databází.
+
+Co dělá:
+připojuje se k PostgreSQL databázi
+provádí SQL dotazy
+zpracovává data z tabulek
+připravuje výsledky pro zobrazení
+Obsahuje funkce:
+connect() – připojení k databázi
+get_okresy() – načtení seznamu okresů
+get_obce_okres() – načtení obcí v okrese
+search_obec() – vyhledávání obcí podle názvu
+stats_okres() – statistiky okresu (SUM, AVG)
+top10_obci() – 10 největších obcí v ČR
+export_csv() – export dat do CSV souboru
+graf_okres() – vizualizace dat pomocí matplotlib
+
+👉 Tento soubor neobsahuje žádné uživatelské rozhraní (žádné menu ani inputy).
+Je to čistě „backend“ – tedy logická část aplikace.
+
+2) interface.py – uživatelské rozhraní
+
+Soubor interface.py slouží jako komunikace mezi uživatelem a backendem.
+
+Co dělá:
+zobrazuje menu
+přijímá vstupy od uživatele
+vypisuje výsledky do konzole
+volá funkce z main.py
+Obsahuje:
+menu() – hlavní menu aplikace
+funkce pro jednotlivé akce:
+výpis okresů
+obce v okrese
+hledání obce
+statistiky
+TOP 10 obcí
+export do CSV
+graf
+
+👉 Tento soubor neobsahuje SQL ani databázovou logiku.
+Pouze „řídí tok programu“ a komunikuje s uživatelem.
+
+3) app.py – spuštění aplikace
+
+Soubor app.py je startovací bod celé aplikace.
+
+Obsah:
+from interface import menu
+
+if __name__ == "__main__":
+    menu()
+Co dělá:
+spouští aplikaci
+zavolá menu z interface.py
+tím se aktivuje celý program
+🔄 Jak celý systém funguje
+Spustí se app.py
+Ten zavolá menu() z interface.py
+Uživatel pracuje v menu
+interface.py volá funkce z main.py
+main.py komunikuje s databází PostgreSQL
+výsledky se vrací zpět do interface.py
+ten je zobrazí uživateli
+🧩 Shrnutí architektury
+Soubor	Role
+main.py	backend (databáze + logika)
+interface.py	frontend (menu + uživatel)
+app.py	start aplikace
+🎯 Výhoda tohoto řešení
+přehledný kód
+snadná úprava rozhraní bez zásahu do logiky
+možnost budoucího rozšíření (např. GUI aplikace)
+profesionální struktura jako v reálných projektech
